@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+    @font-face {
+            font-family: Heavitas;
+            src: url("Gotham-Black.otf");
+    }
+    @font-face {
+            font-family: Arcane;
+            src: url("Arcane Nine.otf");
+    }
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        font-family: Heavitas;
+    }
+
+    .countdown {
+        position: absolute;
+        top: 48%;
+        left: 6%;
+        transform: translate(9%, -50%);
+        font-size: 11vw;
+        letter-spacing: -7px;
+        text-align: center;
+        background: linear-gradient(to top, #323933, #8dc396);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .countdown span {
+        display: inline-block;
+        min-width: 50px;
+    }
+
+    .bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+         
+    }
+
+    .bg img {
+        object-fit: center;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .man{
+            position: absolute;
+            top: 12%;
+            left: 50%;
+            height: 40%;
+            transform: translate(-40%, -40%);
+            z-index: 1;
+        }
+    .man img{
+        height: 260%;
+        width: 120%;
+    }
+    .text{
+        font-family: Arcane;
+        letter-spacing: 22px;
+        background: linear-gradient(to top, #ffffff, #c9c9c9);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        position: absolute;
+        font-size: 150%;
+        top: 90%;
+        left: 30%;
+        transform: translate(-15%, -50%);
+        z-index: 1;
+    }
+
+    @media screen and (max-width: 768px) {
+        .countdown {
+            font-size: 8vw;
+        }
+
+        .text {
+            font-size: 120%;
+            letter-spacing: 15px;
+            top: 85%;
+            left: 20%;
+        }
+
+        .man {
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .man img {
+            height: 200%;
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .countdown {
+            font-size: 6vw;
+            letter-spacing: -3px;
+        }
+
+        .text {
+            font-size: 100%;
+            letter-spacing: 10px;
+            top: 80%;
+            left: 15%;
+        }
+
+        .man {
+            top: 25%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .man img {
+            height: 150%;
+            width: 90%;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <div class="bg">
+        <img src="Frame 1.jpg" alt="background">
+    </div>
+    <div class="countdown">
+        <span id="days">00</span> : <span id="hours">00</span> : <span id="minutes">00</span> : <span id="seconds">00</span>
+    </div>
+    <div class="man">
+        <img src="silhouette.webp" alt="background">
+    </div>
+    <div class  = "text">
+        <h4>AWAKEN THE CREATOR WITHIN</h4>
+    </div>
+    <script>
+        // Set the target date for the countdown
+        const targetDate = new Date("2025-02-28T00:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            // Calculate time components
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Update the countdown
+            document.getElementById("days").textContent = String(days).padStart(2, "0");
+            document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+            document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+            document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+
+            // Stop countdown when target date is reached
+            if (distance < 0) {
+                clearInterval(interval);
+                document.querySelector(".countdown").innerHTML = "<span>Countdown Ended</span>";
+            }
+        }
+
+        // Update countdown every second
+        const interval = setInterval(updateCountdown, 1000);
+        updateCountdown(); // Run once to initialize immediately
+    </script>
+
+</body>
+</html>
