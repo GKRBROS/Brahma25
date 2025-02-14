@@ -51,7 +51,25 @@
     #content {
       opacity: 0;
     }
-    
+    ::-webkit-scrollbar {
+  width: 12px;                /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: black;           /* Black background for the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: grey;      /* Grey color for the thumb */
+  border-radius: 6px;          /* Rounded edges for the thumb */
+  border: 2px solid black;     /* Optional: border around the thumb */
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;       /* Makes the scrollbar thinner */
+  scrollbar-color: grey black; /* Thumb color first (grey), then track color (black) */
+}
     /* Simple Fade-In Animation */
     #content.visible {
       animation: fadeIn 1s ease forwards;
