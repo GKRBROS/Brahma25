@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="Icon" href="./logo 1.png">
+  <title>Brahma'25</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: black;
+    }
+
+    .slider-container {
+      width: 80%; /* Adjusted width */
+      max-width: 1020px; /* Max width */
+      margin: 50px auto;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    .slider-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3 columns */
+      gap: 80px; /* Space between slides */
+      justify-content: center;
+    }
+
+    .slide {
+      border-radius: 0px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      background-color: #222;
+      color: #fff;
+      height: 420px; /* Increased height */
+      position: relative; /* To position text */
+      border-radius: 20px;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%; /* Set height to fill the slide */
+      object-fit: cover; /* Maintain aspect ratio */
+      transition: transform 0.5s ease;
+    }
+
+    .slide .info {
+      position: absolute; /* Position text on top of the image */
+      bottom: 0px; /* Distance from bottom */
+      left: 0;
+      right: 0;
+      padding: 20px;
+      background-color: rgba(34, 34, 34, 0.8); /* Background for text */
+    }
+
+    .slide h2 {
+      margin: 0;
+      font-size: 1.3em;
+      color: #fff; /* Text color */
+    }
+
+    /* Responsive styles */
+    @media (max-width: 1200px) {
+      .slider-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
+      }
+    }
+
+    @media (max-width: 768px) {
+      .slider-grid {
+        grid-template-columns: 1fr; /* 1 column for mobile devices */
+      }
+
+      .slider-container {
+        padding: 10px;
+      }
+
+      .slide {
+        margin-bottom: 20px; /* Add margin between slides on mobile */
+      }
+    }
+
+    /* Smaller screen font adjustments */
+    @media (max-width: 480px) {
+      .slide h2 {
+        font-size: 1.2em;
+      }
+    }
+    .banner {
+      width: 100%;
+      background-color: black;
+      text-align: center;
+      padding: 0 0 160px; 
+    }
+ .banner img {
+      width: 100%;
+      height: auto;
+      /* max-width: 1600px; */
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="banner">
+    <img src="./brahma team banner.jpg" alt="Team 24 Logo">
+  </div>
+  <div class="slider-container">
+    <div class="slider-grid">
+      <!-- Row 1 -->
+      <div class="slide">
+        <img src="" alt="Person 1 Image">
+        <div class="info">
+          <h2>ANABEL GEORGE</h2>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="Alwin.jpg" alt="Person 2 Image">
+        <div class="info">
+          <h2>ALWIN ANTONY MJ</h2>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="Azfar.jpg" alt="Person 3 Image">
+        <div class="info">
+          <h2>AZFAR KN</h2>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="slide">
+        <img src="" alt="Person 4 Image">
+        <div class="info">
+          <h2>DEVARSH </h2>
+        </div>
+      </div> 
+      <div class="slide">
+        <img src="gk12.jpg" alt="Person 4 Image">
+        <div class="info">
+          <h2>GOKUL KIRAN R</h2>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="Madhavan.jpg" alt="Person 5 Image">
+        <div class="info">
+          <h2>MADHAVAN V</h2>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="./noel.jpg" alt="Person 6 Image">
+        <div class="info">
+          <h2>NOEL MATHEW JINS</h2>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="slide">
+        <img src="Richard.jpg" alt="Person 7 Image">
+        <div class="info">
+          <h2>RICHARD B MELATH</h2>
+        </div>
+      </div>
+    <div class="slide">
+        <img src="" alt="Person 8 Image">
+        <div class="info">
+          <h2>SARANG R</h2>
+        </div>
+      </div>
+      <div class="slide" >
+        <img src="Thomas.jpg" alt="Person 9 Image">
+        <div class="info">
+          <h2>THOMAS ELDHOSE</h2>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="Vaishnav.jpg" alt="Person 10 Image">
+        <div class="info">
+          <h2>VAISHNAV V</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+
+    slides.forEach(slide => {
+      const imgElement = slide.querySelector('img');
+      const originalSrc = imgElement.src;
+      const hoverSrc = slide.getAttribute('data-hover-image');
+
+      slide.addEventListener('mouseenter', () => {
+        if (hoverSrc) {
+          imgElement.src = hoverSrc; // Change image if hoverSrc exists
+        }
+      });
+
+      slide.addEventListener('mouseleave', () => {
+        imgElement.src = originalSrc; // Revert to original image
+        audioPlayer.pause();
+        audioPlayer.currentTime = 0; // Reset audio to start
+      });
+    });
+  </script>
+
+</body>
+</html>

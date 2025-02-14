@@ -1,0 +1,2314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="Icon" href="./logo 1.png">
+  <title>Brahma'25</title>
+  <style>
+
+@font-face {
+            font-family: gt;
+            src: url('The Blackmore DEMO.otf');
+        }
+        @font-face {
+            font-family: gg;
+            src: url('MangoGrotesque-Bold.otf');
+        }
+        @font-face {
+        font-family: danger;
+        src: url('Schnebel Slab Pro.ttf');
+        }
+        @font-face {
+        font-family: 'Space Grotesk';
+        src: url('SpaceGrotesk-Regular.ttf');
+        }
+        @font-face {
+        font-family: 'bebas';
+        src: url('BebasNeue-Regular.otf');
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+        .loader {
+            position: fixed;
+            background: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            width: 100%;
+            height: 100%;
+        }
+
+        .loader video {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+        }
+
+        .container {
+            /* display: none; */
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow-x: hidden;
+            overflow: hidden;
+        }
+
+        .image-container {
+            position: absolute;
+            top: 0vw;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            object-fit: cover;
+            /* background-color: #000000; */
+            overflow-x: hidden;
+        }
+
+        .spotlight-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            overflow-x: hidden;
+            -webkit-mask-image: radial-gradient(
+                400px at var(--x, 0) var(--y, 0),
+                rgb(0, 0, 0) 50%,
+                transparent 80%
+            );
+            mask-image: radial-gradient(
+                400px at var(--x, 0) var(--y, 0),
+                rgb(0, 0, 0) 50%,
+                transparent 80%
+            );
+        }
+        .hero-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            z-index: 2;
+        }
+
+        h1 {
+            margin: 0;
+            padding: 0;
+            margin-right: 3vw;
+            font-family: gg;
+            margin-top: 10vw;
+            font-weight: bold;
+            font-size: 82vh;
+            line-height: 0.9;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .letter-mask {
+            display: inline-block;
+            position: relative;
+            cursor: none;
+            margin: 0;
+            padding: 0;
+            width: auto;
+            margin-right: -0.1em; /* Added negative right margin */
+        }
+
+        .char {
+        display: inline-block;
+        color: rgb(255, 229, 213);
+        position: relative;
+        /* Remove all transitions from .char directly */
+        /* transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); REMOVE THIS */
+        /* transform-origin: center center; REMOVE THIS*/
+        width: 100%; /* Ensure it fills the container */
+        height: 100%; /* Ensure it fills the container */
+        padding: 0;
+        margin: 0;
+          /* Add initial background properties */
+        background-size: 90% 90%;  /*Initial size: No zoom */
+        background-position: center center;
+        background-repeat: no-repeat;
+        transition: background-size 0.3s ease; /* Transition ONLY background-size */
+        object-fit: contain;
+    }
+
+
+    .letter-mask:hover .char {
+          /* Only change background-size on hover */
+        /*background-size: 380% 130%;  /* Zoomed size */
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;  /* Make text transparent */
+    }
+        /* Individual Letter Hover Backgrounds with Zoom */
+        .letter-mask:nth-child(1):hover .char {
+            background-image: url(B.png);
+            object-fit: contain;
+            background-size: 100% 100%;
+        }
+        .letter-mask:nth-child(2):hover .char {
+            background-image: url(R.png);
+            background-size: 100% 100%;
+            object-fit: contain;
+        }
+        .letter-mask:nth-child(3):hover .char {
+            background-image: url(A1.png);
+            background-size: 100% 100%;
+            object-fit: contain;
+        }
+        .letter-mask:nth-child(4):hover .char {
+            background-image: url(H.png);
+            background-size: 100% 100%;
+            object-fit: contain;
+        }
+        .letter-mask:nth-child(5):hover .char {
+            background-image: url(M.png);
+            background-size: 100% 100%;
+            object-fit: contain;
+        }
+        .letter-mask:nth-child(6):hover .char {
+            background-image: url(A2.png);
+            background-size: 100% 100%; 
+            object-fit: contain;
+        }
+        .ct {
+            position: absolute;
+            text-align: center;
+            font-size: 1.3vw;
+            width: 100%;
+            top: 6vw;
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Space Grotesk';
+            z-index: 3; 
+            color: rgb(255, 229, 213);
+        }
+
+        .p1 {
+            color: rgb(255, 229, 213);
+            text-align: center;
+            margin-left: 5.5vw; /* Adjust spacing */
+        }
+        .imm{
+            position: absolute;
+  top: 13%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+
+        }
+        .imt{
+            width: 180px;
+  height: auto;
+  display: block;
+
+        }
+        .p3 {
+            color: rgb(255, 229, 213);
+            text-align: right;
+            margin-right: 7vw;
+            top: 2vw;
+        }
+
+        .cc {
+            overflow: hidden;
+height: auto; /* Changed from fixed 10% */
+position: absolute;
+text-align: center;  
+top: 85vh; /* Changed from 25vw to use viewport height */
+left: 50%;
+transform: translate(-50%, -50%);
+font-family: gt;
+z-index: 3;
+margin: 0; /* Removed margins */
+}
+
+.cc p {
+font-size: 13vw;
+color: #FB4E2B;
+margin: 0; /* Remove default paragraph margins */
+line-height: 1; /* Add line height control */
+position: relative; /* Changed from absolute positioning */
+}
+        .mob{
+            display: none;
+        }
+        .tab{
+            display: none;
+        }
+        
+        @media only screen and (min-device-width : 1025px) 
+        and (max-device-width : 1700px) {
+          .hero-text{
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: relative;
+          }
+          .p1,.p3{
+            font-size: 1.5vw;
+          }
+          .char{
+            font-size: 72vh;
+          }
+          h1{
+            position: relative;
+            margin-top: 0;
+            
+          }
+          .cc{
+            top: 40vw;
+          }
+          .imm{
+            top: 10%;
+          }
+        }
+        @media (min-width: 2560px) { /* 2K resolution */
+          .mob{
+            display: none;
+        }
+        .tab{
+            display: none;
+        } 
+    h1 {
+        font-size: 80vh;
+    }
+}
+
+@media (min-width: 3840px) { /* 4K resolution */
+  .mob{
+            display: none;
+        }
+        .tab{
+            display: none;
+        }  
+  h1 {
+        font-size: 78vh;
+    }
+}
+
+        @media only screen and (min-device-width : 769px) 
+        and (max-device-width : 1024px) {
+            ::-webkit-scrollbar {
+display: none;
+}
+            .mob,.hero-text,.cc,.imm,.ct{
+                display: none;
+            }
+            .tab{
+                display: block;
+                position: absolute;
+                top: -10%;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+            }
+            .tb{
+              display: block;
+              width: 100%;
+              top: 0;
+            }
+            /* .mob{
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+            
+        }
+        .mb{
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            object-fit: contain;
+            background-size: contain;
+            background-position: center;
+        } */
+            .image-container {
+            display: none;
+        }
+
+        }
+        @media (max-width: 768px) {
+            .mob,.hero-text,.cc,.imm,.ct{
+                display: none;
+            }
+            .tab{
+                display: block;
+                position: absolute;
+                top: -10%;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+            }
+            .tb{
+              display: block;
+              width: 100%;
+              top: 0;
+            }
+            /* .mob{
+                display: block;
+            position: absolute;
+            top: -25%;
+            left: 0;
+            width: 100%;
+            height: 150vh;
+            object-fit: contain;
+        }
+        .mb{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            object-fit: cover;
+        } */
+            .image-container {
+            display: none;
+        }
+    }
+      @media (max-width: 480px){
+        .tab,.hero-text,.cc,.imm,.ct{
+                display: none;
+            }
+            .mob{
+                display: block;
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            /* object-fit: cover; */
+        }
+        .mb{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+            .image-container {
+            display: none;
+        }
+    }
+    @media (width: 412px){
+      .tab,.hero-text,.cc,.imm,.ct{
+                display: none;
+            }
+            .mob{
+                display: block;
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            /* object-fit: cover; */
+        }
+        .mb{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+            .image-container {
+            display: none;
+        }
+        }
+        @media (max-width: 375px){
+          .tab,.hero-text,.cc,.imm,.ct{
+                display: none;
+            }
+            .mob{
+                display: block;
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            /* object-fit: cover; */
+        }
+        .mb{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+            .image-container {
+            display: none;
+        }
+        }
+        @media (max-width: 360px){
+          .tab, .hero-text,.cc,.imm,.ct{
+                display: none;
+            }
+            .mob{
+                display: block;
+            position: absolute;
+            top: 2%;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            /* object-fit: cover; */
+        }
+        .mb{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+            .image-container {
+            display: none;
+        }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap');
+
+        @font-face {
+  font-family: myFirstFont;
+  src: url('./fonts/fonnts.com-Vincente-Extra-Bold.otf');
+}
+@font-face {
+    font-family: 'CustomFont';
+    src: url('./aAbsoluteEmpire.otf') format('opentype');
+}
+::-webkit-scrollbar {
+  display: none;               /* Width of the scrollbar */
+}
+
+
+:root {
+      --bg: hsl(0, 0%, 0%);
+      --highlight: 2;
+      --spread: 1;
+      --primary: #ffffff;
+      --secondary: #606060;
+      --primary-bg: linear-gradient(var(--primary), var(--primary));
+    }
+
+    /* When gradient is enabled, override primary background */
+    [data-gradient="true"] {
+      --primary-bg: conic-gradient(
+        from var(--angle, 180deg) at 50% 90%,
+        hsla(0, 0%, 98%, 1) 0deg,
+        #eec32d 72deg,
+        #ec4b4b 144deg,
+        #709ab9 216deg,
+        #4dffbf 288deg,
+        hsla(0, 0%, 98%, 1) 1turn
+      );
+    }
+
+    /* Main container wrapping everything */
+    .exciting-container {
+      position: relative;
+      display: grid;
+      place-items: center;
+      
+      min-height: 60vh; /* Reduced from 100vh to 50vh */
+      background: var(--bg);
+      overflow: hidden;
+      padding: 1rem;
+    }
+
+    /* Background grid effect applied to the container */
+    .exciting-container::before {
+      --size: 120px;
+      --line: hsla(0, 0%, 100%, 0.13);
+      --thickness: 2px;
+      --offset: 60px;
+      content: "";
+      z-index: -1;
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          transparent 0 calc(var(--size) - var(--thickness)),
+          var(--line) calc(var(--size) - var(--thickness)) var(--size)
+        )
+        var(--offset) var(--offset) / var(--size) var(--size),
+        linear-gradient(
+          90deg,
+          transparent 0 calc(var(--size) - var(--thickness)),
+          var(--line) calc(var(--size) - var(--thickness)) var(--size)
+        )
+        var(--offset) var(--offset) / var(--size) var(--size);
+    }
+
+    /* Inner wrapper for content */
+    .wrapper {
+      padding: 1rem; /* Adjusted padding for a more compact layout */
+      background: var(--bg);
+      position: relative;
+      width: 100%;
+      max-width: 800px; /* Reduced container width */
+      margin: auto;
+    }
+
+    h2 {
+      font-family: "Geist Sans", sans-serif;
+      font-weight: 120;
+      line-height: 1.07;
+      background:
+        var(--primary-bg),
+        linear-gradient(var(--secondary), var(--secondary)),
+        linear-gradient(
+          var(--secondary) 0 calc((var(--highlight) + var(--spread)) * 1lh),
+          transparent
+        );
+      background-repeat: no-repeat;
+      background-size:
+        100% calc(var(--highlight) * 1lh),
+        100% calc((var(--highlight) + var(--spread)) * 1lh),
+        100% 100%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      text-wrap: balance;
+      font-size: clamp(2rem, 1rem + 4vw, 12rem);
+      margin: 0;
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    /* Responsive adjustments for smaller devices */
+    @media (max-width: 768px) {
+      .wrapper {
+        padding: 1rem;
+      }
+      h2 {
+        font-size: clamp(2.2rem, 2vw + 1.2rem, 7rem);
+      }
+    }
+
+    /* Animation for the gradient if preferred */
+    @media (prefers-reduced-motion: no-preference) {
+      @property --angle {
+        inherits: true;
+        initial-value: 180deg;
+        syntax: '<angle>';
+      }
+      @keyframes rotate {
+        to {
+          --angle: 540deg;
+        }
+      }
+      [data-gradient="true"][data-animate="true"] {
+        animation: rotate 6s infinite linear;
+      }
+    }
+
+
+
+
+
+
+.reveal {
+    opacity: 0; /* Initially hidden */
+     /* Start slightly lower */
+    transition: all 0.8s ease-out; /* Smooth animation */
+}
+
+.reveal.active {
+    opacity: 1; /* Fully visible */
+    transform: translateY(50); /* Return to original position */
+}
+
+
+    /* Base reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { font-family: sans-serif;background-color: #000;
+                
+    }
+
+
+    /* Set up a CSS variable for viewport height */
+    :root {
+      --vh: 1vh;
+    }
+    
+
+
+
+
+
+
+
+        nav {
+            width: 100%;
+    height: 80px;
+    line-height: 80px;
+    background: linear-gradient(135deg,
+        rgba(0, 0, 0, 0.15) 0%,
+        rgba(0, 0, 0, 0.25) 100%);
+        backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px); /* For Safari */
+      
+      /* Optional: add a subtle box shadow */
+  
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 2px solid #333;
+    z-index: 1000;
+    position: fixed;
+        }
+
+        /* Menu Icon */
+        .menu-icon {
+    width: 45px; /* Width of the menu bar lines */
+    height: 15px; /* Height of the container */
+    position: relative; /* For positioning the lines */
+    cursor: pointer; /* Pointer cursor on hover */
+    color: #fff;
+    
+    
+}
+#navbar {
+    position: fixed;
+    top: -80px; /* Start hidden */
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Semi-transparent for effect */
+    transition: top 0.4s ease-in-out; /* Smooth transition */
+    z-index: 1000;
+}
+
+.menu-icon::before,
+.menu-icon::after {
+    content: '';
+    display: block;
+    width: 100%; /* Full width of the container */
+    height: 2px; /* Thickness of the lines */
+    background-color: white; /* Color of the lines */
+    position: absolute; /* Positioning relative to .menu-icon */
+    left: 0; /* Align the lines to the left */
+    transition: transform 0.4s ease, background-color 0.3s ease; /* Smooth animation */
+}
+
+.menu-icon::before {
+    top: 0; /* Position the top line */
+}
+
+.menu-icon::after {
+    bottom: 0; /* Position the bottom line */
+}
+
+/* Hover Effect */
+.menu-icon:hover::before {
+    transform: translateX(-10px); /* Move top line to the left */
+}
+
+.menu-icon:hover::after {
+    transform: translateX(10px); /* Move bottom line to the right */
+}
+
+
+        /* Full-Screen Overlay Menu */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.4s ease-in-out;
+            z-index: 999;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .overlay ul {
+            list-style: none;
+            text-align: center;
+            padding: 0;
+        }
+
+        .overlay ul li {
+            margin: 20px 0;
+        }
+
+        .overlay ul li a {
+    color: white;
+    text-decoration: none;
+    font-family: myFirstFont;
+    font-size: 78px;
+    
+    font-weight: 700;
+    position: relative; /* For positioning the pseudo-element */
+    display: inline-block; /* Ensures inline styling works properly */
+    transition: color 0.3s ease; /* Smooth text color transition */
+}
+
+.overlay ul li a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%; /* Position the line in the vertical center of the text */
+    transform: translateY(-50%) scaleX(0); /* Hidden line initially */
+    width: 100%; /* Full width of the text */
+    height: 8px; /* Thickness of the red line */
+    background-color: red; /* Red line color */
+    transform-origin: center;
+    transition: transform 0.4s ease; /* Smooth animation for line */
+}
+
+
+
+.overlay ul li a:hover::after {
+    transform: translateY(-50%) scaleX(1); /* Fully reveal the line on hover */
+}
+.logon {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 50px; /* Adjust the height of the logo */
+}
+
+
+        /* Close Button */
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 35px;
+            color: white;
+            cursor: pointer;
+        }
+
+
+
+        .containerabout {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #000000;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            
+            text-align: center;
+        }
+
+        .logo-and-video {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            width: 100%;
+            max-width: 1350px;
+        }
+
+        .logo {
+            flex: 1;
+            text-align: center;
+            max-width: 250px;
+        }
+
+        .logo img {
+            width: 100%;
+            max-width: 250px;
+        }
+
+        .video-section {
+            flex: 2;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .video-section video {
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            object-fit: cover;
+            /* border: 2px solid #333; */
+            /* border-radius: 10px; */
+        }
+
+        .description {
+      margin-top: 15px;
+      text-align: justify;
+      padding: 0 15px;
+    }
+    
+    .description p {
+      font-size: clamp(1.5rem, 2vw, 1.2rem);
+      line-height: 1.5;
+      font-weight: 200;
+      font-family: "bebas";
+      /* No need to set text color here because each word will be styled individually */
+    }
+    
+    /* Each word (wrapped in a span) starts with only an outline */
+    .description p span {
+      /* Initially, fill is transparent */
+      color: rgba(255, 255, 255, 0);
+      /* Outline: 1px white stroke around the letter */
+      -webkit-text-stroke: .3px #fff;
+      /* Animate the color property from transparent to full white */
+      animation: fillIn 0.5s forwards;
+    }
+    
+    /* Define the animation for the fill color */
+    @keyframes fillIn {
+      from {
+        color: rgba(255, 255, 255, 0);
+      }
+      to {
+        color: rgba(255, 255, 255, 1);
+      }
+    }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            border-top: 2px solid #333;
+            border-bottom: 2px solid #333;
+            flex-wrap: wrap;
+            gap: 15px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .stats .stat {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .stats .stat h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: #ffcc00;
+            font-weight: 900;
+        }
+
+        .stats .stat p {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            font-weight: 300;
+            color: #9F5D1C;
+            line-height: 1.2;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+        @media (max-width: 768px) { 
+  #navbar {
+    position: fixed;
+    top: -80px; /* Initially hidden */
+    left: 0;
+    width: 100%;
+    height: 80px;
+    line-height: 80px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.25) 100%);
+    backdrop-filter: blur(10px);
+    transition: top 0.4s ease-in-out;
+    z-index: 1000;
+  }
+}
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .logo-and-video {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo img {
+                max-width: 200px;
+            }
+
+            .video-section {
+                max-width: 90%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .containerabout {
+                height: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .description p {
+                font-size: 1.1rem;
+            }
+            .containerabout {
+                height: auto;
+            }
+            .stats .stat h2 {
+                font-size: 1.8rem;
+            }
+
+            .stats .stat p {
+                font-size: 1.3rem;
+            }
+        }
+        @media (min-width: 1025px) {
+    .logo-and-video {
+        flex-direction: row;  /* Arrange elements side-by-side */
+        text-align: left;
+    }
+
+    .logo img {
+        max-width: 250px;  /* Slightly larger image on desktop */
+    }
+
+    .video-section {
+        max-width: 60%;
+    }
+}
+
+/* Styles for 4K screens (typically 3840px or wider) */
+@media (min-width: 3840px) {
+    /* Increase sizes and spacing to make the content more readable on ultra-high resolution screens */
+    .logo img {
+        max-width: 350px;
+    }
+
+    .description p {
+        font-size: 1.5rem;
+    }
+
+    .stats .stat h2 {
+        font-size: 2.5rem;
+    }
+
+    .stats .stat p {
+        font-size: 1.8rem;
+    }
+
+    /* Add any additional 4K-specific adjustments here */
+}
+
+
+        :root {
+            --marquee--colour: #f3bb0b;
+        }
+
+
+
+
+        .marquee-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background-size: cover;
+            background: black;
+        }
+
+
+        .marquees {
+            align-content: center;
+            height: 100vh;
+            display: grid;
+            gap: 5vw;
+            overflow: hidden;
+        }
+
+
+        .marquee {
+            overflow: hidden;
+            width: 100%;
+            margin-left: 0%;
+            
+            transform: rotate(-5deg);
+            background: var(--marquee--colour);
+            color: #000;
+            white-space: nowrap;
+        }
+        .marquee:nth-child(even) {
+            transform: rotate(5deg);
+            background: #000;
+            color: var(--marquee--colour);
+        }
+
+
+        .marquee p {
+            font-weight: bold;
+            margin: 0;
+            display: flex;
+            gap: 0;
+            line-height: 1.1;
+            font-size: clamp(2.5rem, 12vw, 6.2rem);
+            font-family: "bebas";
+        }
+
+
+        .marquee--inner {
+            width: max-content;
+            display: flex;
+            text-transform: uppercase;
+            animation: marquee linear infinite;
+        }
+
+
+        @keyframes marquee {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
+        .marquee:nth-child(odd) .marquee--inner {
+      animation-direction: reverse;
+    }
+
+    /* Container A – red background */
+  
+
+    /* Container B Wrapper – extra tall for scroll duration */
+    .container-b-wrapper {
+      position: relative;
+      /* The extra height (3420px) comes from the animation parameters */
+      height: calc(var(--vh, 1vh) * 100 + 3420px);
+    }
+
+
+    /* Container B – pinned container for the animation */
+    .container-b {
+      position: sticky;
+      top: 0;
+      height: calc(var(--vh, 1vh) * 100);
+      background-color: black;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+
+    /* Gallery & image styles (inside Container B) */
+    .gallery {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    .image {
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+      /* Initially hidden and far back in Z-space */
+      opacity: 0;
+      transform: translateZ(-1000px) scale(0.5);
+      transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+    }
+    .final-image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 90vmin;
+      height: 90vmin;
+      opacity: 0;
+      transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+      z-index: 900;
+    }
+    .text-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 1s ease-in, transform 1s ease-out;
+      z-index: 1000;
+    }
+    .text {
+      font-size: 48px;
+      font-weight: bold;
+      color: white;
+      white-space: nowrap;
+      text-align: center;
+      transform: translate(-50%, 0);
+    }
+
+
+    /* --- Container C Styles --- */
+    /* A placeholder to reserve 100vh space in the document flow */
+  
+    /* Container C – fixed so it can overlap Container B when revealed */
+    .container-c {
+      position: relative;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: blue;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2em;
+      z-index: 2;
+      /* Start completely offscreen (below the viewport) */
+      transform: translateY(100%);
+      transition: transform 0.2s ease-out;
+    }
+
+
+   
+    .containerr {
+  width: 100%;
+      max-width: 800px;
+      height: 500px;
+      display: flex;
+      gap: 1.25rem;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+
+    .card {
+      flex: 1;
+      transition: all 400ms ease;
+      cursor: pointer;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Initial staggered positioning */
+    .card:nth-child(odd) {
+      transform: translateY(-20px);
+    }
+    
+    .card:nth-child(even) {
+      transform: translateY(20px);
+    }
+
+    /* Hover effects */
+    @media (hover: hover) {
+      .containerr:hover .card:not(:hover) {
+        filter: grayscale(100%);
+        flex: 1;
+      }
+    }
+
+    .card:hover {
+      flex: 4;
+      transform: translateY(0);
+    }
+
+    /* Image styling */
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .containerr {
+        height: auto;
+        flex-direction: column;
+        padding: 20px;
+        gap: 1rem;
+      }
+
+      .card {
+        width: 100%;
+        height: 200px;
+        flex: none;
+        transform: none !important;
+      }
+
+      .card:hover {
+        flex: 2;
+        height: 300px;
+      }
+
+      /* Optional: Disable hover effects on mobile */
+      .containerr:hover .card:not(:hover) {
+        filter: grayscale(100%);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        height: 150px;
+      }
+
+      .card:hover {
+        height: 300px;
+      }
+    }
+
+/* ====================Footer_starting======================= */
+
+
+    @font-face {
+      font-family: 'CustomFont';
+      src: url('./fonts/aAbsoluteEmpire.otf') format('opentype');
+    }
+
+    @font-face {
+      font-family: 'CustomFont1';
+      src: url('./fonts/Montserrat-VariableFont_wght.ttf') format('opentype');
+    }
+
+   
+    main {
+      flex: 1;
+    }
+
+    /* Footer Container */
+    .footer-container {
+      width: 100%;
+      color: #fff;
+      padding: 40px 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      overflow: hidden;
+      background-color: black;
+      position: relative;
+    }
+
+    /* Background Image & Overlay */
+    .footer-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .footer-background img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transform: scale(1.2);
+    }
+    .footer-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 2;
+    }
+
+    /* Footer Content Layout:
+       Divided into three rows:
+         1. Brand section (morphing text)
+         2. Navigation container (three columns for nav sections)
+         3. Copyright
+    */
+    .footer-content {
+      position: relative;
+      z-index: 3;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto;
+      row-gap: 40px;
+    }
+    .brand-section {
+      grid-row: 1;
+      text-align: center;
+      position: relative;
+    }
+    /* Navigation Container: Always three columns */
+    .nav-container {
+      grid-row: 2;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      
+    }
+    /* Default: Nav sections remain left aligned */
+    .nav-section {
+      text-align: left;
+      transform: translate(30%,0%);
+
+    }
+    .nav-title {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 20px;
+      color: #fff;
+      font-family: 'CustomFont';
+
+    }
+    .nav-link {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      margin-bottom: 12px;
+      font-size: 18px;
+      transition: color 0.2s;
+      display: block;
+      font-family: 'CustomFont1';
+    }
+    .nav-link:hover {
+      color: #fff;
+    }
+    .copyright {
+      grid-row: 3;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    /* Morphing Text Styles */
+    /* Default (Larger screens): Absolutely positioned and centered */
+    #container {
+      position: absolute;
+      margin: auto;
+      width: 100vw;
+      height: 80pt;
+      top: 0;
+      bottom: 0;
+      transform: translate(-45%, -50%);
+      filter: url(#threshold) blur(0.6px);
+    }
+    #text1,
+    #text2 {
+      position: absolute;
+      width: 100%;
+      display: inline-block;
+      font-family: 'CustomFont';
+      font-size: 50pt;
+      text-align: center;
+      user-select: none;
+      /* top: 50%; */
+      transform: translate(-17%,70%);
+    }
+    @media screen and (min-width: 3840px) and (max-width: 8000px) {
+    #container {
+        transform: translate(-45%, -50%);
+    }
+    
+    #text1,
+    #text2 {
+        transform: translate(-41%, 70%);
+    }
+    
+    .nav-section {
+        transform: translate(30%, 0%);
+      }
+}
+    /* For screens 1200px or less: reposition morph container to the top */
+    @media screen and (max-width: 1200px) {
+      #container {
+        position: relative;
+        margin: 0 auto;
+        width: 100%;
+        height: 80pt;
+        top: 0%;
+        bottom: auto;
+        transform: none;
+        margin-bottom: 20px;
+      }
+      #text1,
+      #text2 {
+        left: 0;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        text-align: center;
+      }
+    }
+
+    /* Reduce footer size on tablets and phones */
+    @media screen and (max-width: 768px) {
+      .footer-container {
+        padding: 20px 0;
+      }
+      .footer-content {
+        row-gap: 20px;
+      }
+      #container {
+        height: 60pt;
+        margin-bottom: 10px;
+      }
+      /* The nav-section alignment remains as defined in HTML/CSS (left aligned) */
+    }
+    @media screen and (max-width: 480px) {
+      .footer-container {
+        padding: 10px 0;
+      }
+      .footer-content {
+        row-gap: 10px;
+      }
+      #container {
+        height: 50pt;
+        margin-bottom: 5px;
+      }
+      .nav-title {
+        font-size: 14px;
+      }
+      .nav-link {
+        font-size: 12px;
+      }
+      .copyright {
+        font-size: 12px;
+      }
+    }
+
+    /* Remove SVG filter from layout flow */
+    #filters {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+    @media screen and (min-width: 1920px) and (max-width: 2559px) {
+    #container {
+        transform: translate(-45%, -50%);
+    }
+    
+    #text1,
+    #text2 {
+        transform: translate(-25%, 70%);
+    }
+    
+    .nav-section {
+        transform: translate(30%, 0%);
+      }
+}
+    @media screen and (min-width: 2560px) {
+        #text1,
+        #text2{
+      transform: translate(-33%,70%);
+        }
+}
+
+
+  </style>
+
+  
+  <nav id="navbar">
+    <div class="menu-icon" onclick="toggleMenu()"></div>
+    <img src="./logo 1.png" alt="Logo" class="logon">
+</nav>
+
+
+<!-- Full-Screen Overlay Menu -->
+<div class="overlay">
+    /* <div class="close-btn" onclick="toggleMenu()">✖</div> */
+    <ul>
+        <li><a href="#">HOME</a></li>
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="./event.html">EVENTS</a></li>
+        <li><a href="./rule.html">RULES</a></li>
+        <li><a href="./sponsor.html">SPONSORS</a></li>
+    </ul>
+</div>
+</head>
+<body>
+
+  <div class="cursor"></div>    
+    <div class="loader" id="loader">
+        <video src="./sec loader.mp4" autoplay muted id="loaderVideo"></video>
+    </div>
+    <section class="container" id="mainContent">
+        <div class="image-container">
+            <img src="./home.png" class="spotlight-image" id="spotlightImage">
+        </div>
+        <div class="mob">
+            <img src="./And.png" class="mb">
+        </div>
+        <div class="tab">
+          <img src="./tab.png" class="tb">
+        </div>
+        <div class="ct">
+            <p class="p1">FEB 28 - MAR 02</p>  
+            <p class="p3">ASIET</p>
+        </div>
+        <div class="imm">
+            <img src="./Fed.png" class="imt">
+        </div>
+        <div class="hero-text">
+            <h1>
+                <span class="letter-mask"><span class="char">B</span></span>
+                <span class="letter-mask"><span class="char">R</span></span>
+                <span class="letter-mask"><span class="char">A</span></span>
+                <span class="letter-mask"><span class="char">H</span></span>
+                <span class="letter-mask"><span class="char">M</span></span>
+                <span class="letter-mask"><span class="char">A</span></span>
+            </h1>
+        </div>
+        <div class="cc">
+            <p>2025</p>
+        </div>
+    </section>
+<div class="containerabout" id="about">
+  <br>
+    <div class="logo-and-video">
+          <div class="logo" data-audio="BrahmaTheme.mp3">
+            <img src="./logo 1.png" alt="Brahms Logo">
+          </div>
+        <div class="video-section">
+            <video autoplay muted loop> <source src="./Brahma1.mp4" type="video/mp4" >
+                
+                Your browser does not support the video tag.
+            </video>
+            <div class="description reveal">
+    <p id="animatedText">
+    Brahma commenced in 2003 as a dynamic celebration of technology and creativity at the heart of the Adi Shankara Institute of Engineering and Technology, providing a platform for aspiring minds to showcase their talents, learn, and forge lasting connections.
+    </p>
+  </div>
+        </div>
+    </div>
+    <br>
+    <div class="stats reveal">
+        <div class="stat">
+            <h2 id="counter1">0+</h2>
+            <p>Events</p>
+        </div>
+        <div class="stat">
+            <h2 id="counter2">0+</h2>
+            <p>Participants</p>
+        </div>
+        <div class="stat">
+            <h2 id="counter3">0+</h2>
+            <p>Colleges</p>
+        </div>
+        <div class="stat">
+            <h2 id="counter4">0+</h2>
+            <p>Prize Pool</p>
+        </div>
+    </div>
+</div></div>
+
+
+  <!-- Container B Wrapper: defines scroll duration for the animation -->
+  <div class="container-b-wrapper" id="containerBWrapper">
+    <!-- Container B: pinned animated container -->
+    <div class="container-b" id="containerB">
+      <div class="gallery" id="gallery"></div>
+      <!-- Replace "1.jpg" with your final image path -->
+      <img class="final-image" id="finalImage" src="./BRAHMA25T.png" alt="Final Image">
+      <div class="text-container" id="finalText"></div>
+    </div>
+  </div>
+
+
+  <!-- Placeholder for Container C (preserves vertical space) -->
+  <div class="container-c-placeholder"></div>
+
+
+  <!-- Container C: fixed element that will slide up after the final image hold -->
+  <div class="container-c" id="containerC"><div class="marquee-container">
+    <div class='marquees'>
+        <section class='marquee'>
+            <div class='marquee--inner'>
+                <p>Awaken The Creator Within * Awaken The Creator Within  * Awaken The Creator Within  *Awaken The Creator Within  *Awaken The Creator Within  *</p>
+            </div>
+        </section>
+
+
+        <div class='marquee'>
+            <div class='marquee--inner'>
+                <p>Awaken The Creator Within  * Awaken The Creator Within  * Awaken The Creator Within *Awaken The Creator Within  *Awaken The Creator Within  *</p>
+            </div>
+        </div>
+
+
+        <section class='marquee'>
+            <div class='marquee--inner'>
+                <p>Awaken The Creator Within  * Awaken The Creator Within  * Awaken The Creator Within  *Awaken The Creator Within  *Awaken The Creator Within  *</p>
+            </div>
+        </section>
+
+
+        <section class='marquee'>
+            <div class='marquee--inner'>
+                <p>Awaken The Creator Within  * Awaken The Creator Within  * Awaken The Creator Within  *Awaken The Creator Within  *Awaken The Creator Within  *</p>
+            </div>
+        </section>
+    </div>
+</div>
+</div>
+</div>
+<div class="containerr">
+    <div class="card">
+      <img src="./Cultural/bob.jpg" alt="card">
+    </div>
+    <div class="card">
+      <img src="./Cultural/grooveGala.jpg" alt="card">
+    </div>
+    <div class="card">
+      <img src="./Cultural/zephyra.jpg" alt="card">
+    </div>
+    <div class="card">
+      <img src="./Cultural/mudhra.jpg" alt="card">
+    </div>
+  </div>
+  <br>  <br>  <br>  <br>  <br>  <br>
+  <footer class="footer-container">
+    <div class="footer-background">
+      <img src="./footer theyyam1.png" alt="Background" />
+    </div>
+    <div class="footer-overlay"></div>
+
+    <div class="footer-content">
+      <div class="brand-section">
+        <!-- Morphing text container -->
+        <div id="container">
+          <span id="text1"></span>
+          <span id="text2"></span>
+        </div>
+        <br><br><br>
+        <svg id="filters">
+          <defs>
+            <filter id="threshold">
+              <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0
+0 1 0 0 0
+0 0 1 0 0
+0 0 0 255 -140" />
+            </filter>
+          </defs>
+        </svg>
+      </div>
+
+      <!-- Navigation container: Always three columns -->
+      <div class="nav-container">
+        <div class="nav-section">
+          <h3 class="nav-title">Navigation</h3>
+          <a href="#" class="nav-link">Home</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="./event.html" class="nav-link">Events</a>
+          <a href="./team.html" class="nav-link">Team</a>
+          <a href="./sponsor.html" class="nav-link">Sponsors</a>
+          <a href="./contact.html" class="nav-link">Contact</a>
+        </div>
+        <div class="nav-section">
+          <h3 class="nav-title">Socials</h3>
+          <a href="https://www.instagram.com/brahma_asiet" class="nav-link" target="_blank">Instagram</a>
+          <a href="https://youtu.be/bnHDyiP05sg?si=oXjmFOCN-ajsLVWo" class="nav-link" target="_blank">YouTube</a>
+          <a href="mailto:brahma@adishankara.ac.in" class="nav-link" target="_blank">Email</a>
+          <a href="https://www.linkedin.com/school/adi-shankara-institute-of-engineering-and-technology-sankar-nagar-mattoor-kalady--683-547/" class="nav-link" target="_blank">LinkedIn</a>
+          <a href="https://maps.app.goo.gl/9LdDB4kk9MnBEPBZ9 "target="_blank" class="nav-link">Map</a>
+          </div>
+        <div class="nav-section">
+          <h3 class="nav-title">RULES</h3>
+          <a href="./rule.html" class="nav-link">Rules</a>
+        </div>
+      </div>
+
+      <div class="copyright">
+        © 2025 Copyright&nbsp; Brahma 25.&nbsp; All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+
+
+    const elts = {
+      text1: document.getElementById("text1"),
+      text2: document.getElementById("text2")
+    };
+
+    const texts = [
+      "Brahma 25",   // English
+      "ബ്രഹ്മ 25",   // Malayalam
+      " ब्राह्मा 25", // Hindi
+      "பிரஹ்மா 25", // Tamil
+      "బ్రహ్మ 25",   // Telugu
+      "બ્રહ્મ 25",   // Gujarati
+      "ಬ್ರಹ್ಮ 25"    // Kannada
+    ];
+
+    const morphTime = 1;
+    const cooldownTime = 0.5;
+
+    let textIndex = texts.length - 1;
+    let time = new Date();
+    let morph = 0;
+    let cooldown = cooldownTime;
+
+    elts.text1.textContent = texts[textIndex % texts.length];
+    elts.text2.textContent = texts[(textIndex + 1) % texts.length];
+
+    function doMorph() {
+      morph -= cooldown;
+      cooldown = 0;
+      let fraction = morph / morphTime;
+      if (fraction > 1) {
+        cooldown = cooldownTime;
+        fraction = 1;
+      }
+      setMorph(fraction);
+    }
+
+    function setMorph(fraction) {
+      elts.text2.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
+      elts.text2.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
+
+      fraction = 1 - fraction;
+      elts.text1.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
+      elts.text1.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
+
+      elts.text1.textContent = texts[textIndex % texts.length];
+      elts.text2.textContent = texts[(textIndex + 1) % texts.length];
+    }
+
+    function doCooldown() {
+      morph = 0;
+      elts.text2.style.filter = "";
+      elts.text2.style.opacity = "100%";
+      elts.text1.style.filter = "";
+      elts.text1.style.opacity = "0%";
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      let newTime = new Date();
+      let shouldIncrementIndex = cooldown > 0;
+      let dt = (newTime - time) / 1000;
+      time = newTime;
+      cooldown -= dt;
+
+      if (cooldown <= 0) {
+        if (shouldIncrementIndex) {
+          textIndex++;
+        }
+        doMorph();
+      } else {
+        doCooldown();
+      }
+    }
+
+    animate();
+
+    function adjustTextSize() {
+      const text1 = document.getElementById("text1");
+      const text2 = document.getElementById("text2");
+      const screenWidth = window.innerWidth;
+      
+      if (screenWidth <= 480) {
+        text1.style.fontSize = "30pt";
+        text2.style.fontSize = "30pt";
+      } else if (screenWidth <= 768) {
+        text1.style.fontSize = "35pt";
+        text2.style.fontSize = "35pt";
+      } else if (screenWidth <= 1200) {
+        text1.style.fontSize = "40pt";
+        text2.style.fontSize = "40pt";
+      } else {
+        text1.style.fontSize = "50pt";
+        text2.style.fontSize = "50pt";
+      }
+    }
+
+    window.addEventListener("load", adjustTextSize);
+    window.addEventListener("resize", adjustTextSize);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function revealOnScroll() {
+        const reveals = document.querySelectorAll('.reveal');
+
+        reveals.forEach((reveal) => {
+            const windowHeight = window.innerHeight;
+            const elementTop = reveal.getBoundingClientRect().top;
+            const revealPoint = 150; // Adjust as needed for when to trigger
+
+            if (elementTop < windowHeight - revealPoint) {
+                reveal.classList.add('active');
+            } else {
+                reveal.classList.remove('active');
+            }
+        });
+    }
+
+    // Add scroll event listener
+    window.addEventListener('scroll', revealOnScroll);
+
+    function animateCounter(id, start, end, duration) {
+      const element = document.getElementById(id);
+      const range = end - start;
+      let current = start;
+      const increment = range / (duration / 50);
+      
+      const interval = setInterval(() => {
+        current += increment;
+        element.textContent = Math.floor(current) + "+";
+        if (current >= end) {
+          element.textContent = end + "+";
+          clearInterval(interval);
+        }
+      }, 50);
+    }
+
+    // Wait for the DOM to load
+    document.addEventListener("DOMContentLoaded", function() {
+      // Select the container that holds the stats counters
+      const statsContainer = document.querySelector('.stats.reveal');
+
+      // Set up the Intersection Observer
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          // Check if the container is in view (50% visible)
+          if (entry.isIntersecting) {
+            // Start the counters
+            animateCounter("counter1", 0, 40, 2000);
+            animateCounter("counter2", 0, 4000, 2000);
+            animateCounter("counter3", 0, 80, 2000);
+            animateCounter("counter4", 0, 650000, 2000);
+
+            // Stop observing after animation has started
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        root: null,      // viewport
+        threshold: 0.5   // trigger when 50% of the element is visible
+      });
+
+      // Start observing the stats container
+      observer.observe(statsContainer);
+    });
+        function toggleMenu() {
+        const overlay = document.querySelector(".overlay");
+        overlay.classList.toggle("active");
+    }
+
+        // Close overlay when clicking a menu link
+        document.querySelectorAll(".overlay ul li a").forEach(link => {
+            link.addEventListener("click", function() {
+                document.querySelector(".overlay").classList.remove("active");
+            });
+        });
+        document.querySelectorAll(".marquee--inner").forEach(marquee => {
+            const textLength = marquee.offsetWidth / 2;
+            marquee.style.animationDuration = `${textLength / 50}s`;
+        });
+   /***********************
+     * SET VIEWPORT HEIGHT FOR MOBILE
+     ***********************/
+     function setVh() {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    setVh();
+    window.addEventListener('resize', setVh);
+
+    /***********************
+     * CONFIGURATION & VARIABLES
+     ***********************/
+    const perImageStep = 300; // Scroll pixels allocated per image animation
+    const maxImages = 7;      // Total number of images
+
+    // Final image trigger: when animation progress reaches this value the final image is revealed.
+    const finalImageTrigger = (maxImages - 1 + 1.4) * perImageStep;
+    
+    // finalHoldRange: Additional scroll (in pixels) during which the final image stays fully visible.
+    const finalHoldRange = 300;  
+    
+    // extraFinalScroll: The scroll range over which Container C slides up.
+    const extraFinalScroll = perImageStep;
+    
+    // Total scroll range now includes the final hold.
+    const animationScrollRange = finalImageTrigger + finalHoldRange + extraFinalScroll;
+
+    let imageCount = 0;
+    let directionFlag = -1;
+
+    // Two alternate starting positions for images.
+    const positions = [
+      { left: "35%", top: "35%" },
+      { left: "55%", top: "30%" }
+    ];
+
+    // Get element references.
+    const containerBWrapper = document.getElementById('containerBWrapper');
+    const gallery = document.getElementById('gallery');
+    const finalImage = document.getElementById('finalImage');
+    const finalText = document.getElementById('finalText');
+    const containerC = document.getElementById('containerC');
+
+    // Image paths (ensure that the array has at least maxImages entries)
+    const imagePaths = [
+      'p11.webp',
+      'p22.webp',
+      'p33.webp',
+      'p44.webp',
+      'p55.webp',
+      'p66.webp',
+      'p77.webp'
+    ];  
+
+    /***********************
+     * IMAGE CREATION FUNCTION
+     ***********************/
+    function createImage() {
+      if (imageCount >= maxImages) return;
+      const img = document.createElement('img');
+      img.src = imagePaths[imageCount];
+      img.classList.add('image');
+      // Use one of the predetermined starting positions.
+      img.style.left = positions[imageCount % positions.length].left;
+      img.style.top = positions[imageCount % positions.length].top;
+      img.dataset.move = directionFlag;
+      directionFlag *= -1;
+      gallery.appendChild(img);
+      imageCount++;
+    }
+
+    /***********************
+     * ANIMATION UPDATE FUNCTION (for Container B’s content)
+     *
+     * This version uses the actual scroll position relative to Container B’s wrapper.
+     * We also force the creation of the first image if none exists and the scroll has begun.
+     ***********************/
+    function updateAnimation() {
+      // Determine the start of Container B's wrapper relative to the document.
+      const startScroll = containerBWrapper.offsetTop;
+      const scrollY = window.pageYOffset;
+      // Compute how far we've scrolled relative to Container B.
+      const relativeScroll = scrollY - startScroll;
+      const totalScroll = containerBWrapper.offsetHeight - window.innerHeight;
+      const progress = Math.min(Math.max(relativeScroll, 0), totalScroll) / totalScroll;
+      // Animation progress in pixels.
+      const animationProgress = progress * animationScrollRange;
+
+      // Force creation of the first image if none exists and scrolling has begun.
+      if (imageCount === 0 && relativeScroll > 0) {
+        createImage();
+      }
+
+      // Reset images when scrolling back upward.
+      if (animationProgress <= 0 && imageCount > 0) {
+        while (gallery.firstChild) {
+          gallery.removeChild(gallery.firstChild);
+        }
+        imageCount = 0;
+        directionFlag = -1;
+      }
+
+      // Update each gallery image.
+      const images = document.querySelectorAll('.image');
+      images.forEach((img, index) => {
+        // Calculate progress for each image.
+        const imgProgress = (animationProgress - index * perImageStep) / perImageStep;
+        const moveDirection = parseFloat(img.dataset.move);
+        const sizeMultiplier = Math.max(0.5, 1 + imgProgress * 1.8);
+        const newOpacity = (imgProgress < 0 || imgProgress > 1.4) ? 0 : 1;
+
+        // Calculate Z translation: from -1000px (when imgProgress is 0) to 0px (when imgProgress is 1).
+        let tz = -1000;
+        if (imgProgress >= 0 && imgProgress <= 1) {
+          tz = -1000 + 1000 * imgProgress;
+        } else if (imgProgress > 1) {
+          tz = 0;
+        }
+
+        img.style.opacity = newOpacity;
+        img.style.transform = `translateZ(${tz}px) translateX(${moveDirection * imgProgress * 350}px) scale(${sizeMultiplier}) rotateY(${moveDirection * imgProgress * 15}deg)`;
+
+        // Create the next image when the current one reaches the threshold.
+        if (index === imageCount - 1 && imageCount < maxImages) {
+          if (sizeMultiplier >= 1.3) {
+            createImage();
+          }
+        }
+      });
+
+      // Handle final image & text animations.
+      if (animationProgress >= finalImageTrigger) {
+        let extraProgress = (animationProgress - finalImageTrigger) / perImageStep;
+        finalText.style.opacity = "1";
+        const textY = Math.max(-50, Math.min(100, 100 - extraProgress * 150));
+        finalText.style.transform = `translate(-50%, ${textY}vh)`;
+        finalImage.style.opacity = "1";
+        const imageScale = Math.min(1, (extraProgress + 0.5) * 2);
+        finalImage.style.transform = `translate(-50%, -50%) scale(${imageScale})`;
+      } else {
+        finalText.style.opacity = "0";
+        finalImage.style.opacity = "0";
+        finalImage.style.transform = "translate(-50%, -50%) scale(0)";
+      }
+
+      // Update Container C reveal after the final image hold.
+      updateParallaxContainerC(animationProgress);
+    }
+
+    /***********************
+     * UPDATE CONTAINER C (Parallax Reveal) FUNCTION
+     ***********************/
+    function updateParallaxContainerC(animationProgress) {
+      let progress = 0;
+      if (animationProgress < finalImageTrigger + finalHoldRange) {
+        progress = 0;
+      } else if (animationProgress > finalImageTrigger + finalHoldRange + extraFinalScroll) {
+        progress = 1;
+      } else {
+        progress = (animationProgress - (finalImageTrigger + finalHoldRange)) / extraFinalScroll;
+      }
+      containerC.style.transform = `translateY(${100 - progress * 100}%)`;
+    }
+
+    /***********************
+     * CONTINUOUS ANIMATION LOOP
+     *
+     * We continuously check the scroll position using requestAnimationFrame,
+     * ensuring that the animation always catches up.
+     ***********************/
+    function animationLoop() {
+      updateAnimation();
+      requestAnimationFrame(animationLoop);
+    }
+    animationLoop();
+
+    /***********************
+     * OPTIONAL: SCROLL EVENT HANDLER
+     *
+     * You can keep this for any extra logic. The animation is now driven continuously.
+     ***********************/
+    let scrollTimeout;
+    function onScroll() {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        // In case additional logic is needed.
+      }, 150);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    
+
+
+
+    function wrapWords(element) {
+      Array.from(element.childNodes).forEach(child => {
+        if (child.nodeType === Node.TEXT_NODE) {
+          const words = child.textContent.split(/(\s+)/);
+          const fragment = document.createDocumentFragment();
+          words.forEach(word => {
+            if (word.trim().length === 0) {
+              fragment.appendChild(document.createTextNode(word));
+            } else {
+              const span = document.createElement("span");
+              span.textContent = word;
+              fragment.appendChild(span);
+            }
+          });
+          child.replaceWith(fragment);
+        } else if (child.nodeType === Node.ELEMENT_NODE) {
+          wrapWords(child);
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      // Get the text paragraph and container elements
+      const paragraph = document.getElementById("animatedText");
+      const container = document.getElementById("containerabout");
+
+      // Wrap each word in the paragraph in a <span>
+      wrapWords(paragraph);
+
+      // Set a staggered animation delay for each word
+      const spans = paragraph.querySelectorAll("span");
+      spans.forEach((span, index) => {
+        span.style.animationDelay = `${index * 0.2}s`;
+      });
+
+      // Use Intersection Observer to detect when the container enters the viewport
+      const observer = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              // Add 'animate' class to the container to start the fill animations
+              container.classList.add("animate");
+              // Optionally, unobserve after the animation has started
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.2 // Trigger when 50% of the container is visible
+        }
+      );
+
+      observer.observe(container);
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+        const logo = document.querySelector(".logo");
+        const audioFile = logo.getAttribute("data-audio");
+
+        if (audioFile) {
+            const sound = new Audio(audioFile);
+
+            logo.addEventListener("mouseenter", function () {
+                sound.currentTime = 0; // Restart audio
+                sound.play().catch(error => console.log("Playback failed:", error));
+            });
+
+            logo.addEventListener("mouseleave", function () {
+                sound.pause();
+                sound.currentTime = 0; // Reset to start
+            });
+    }
+});
+    
+
+let vid = document.getElementById("loaderVideo");
+        vid.playbackRate = 1.2;
+        // Handle loader video
+        document.getElementById('loaderVideo').addEventListener('ended', () => {
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+        });
+        // Cursor and mask effect
+        const cursor = document.querySelector('.cursor');
+        const image = document.getElementById('spotlightImage');
+        const letters = document.querySelectorAll('.letter-mask');
+
+        document.addEventListener('mousemove', (e) => {
+            // Move custom cursor
+            cursor.style.left = e.pageX + 'px';
+            cursor.style.top = e.pageY + 'px';
+
+            // Update mask position
+            image.style.setProperty('--x', e.pageX + 'px');
+            image.style.setProperty('--y', e.pageY + 'px');
+        });
+
+        // Handle cursor hover effect on letters
+        letters.forEach(letter => {
+            letter.addEventListener('mouseenter', () => {
+                cursor.classList.add('expanded');
+            });
+            
+            letter.addEventListener('mouseleave', () => {
+                cursor.classList.remove('expanded');
+            });
+        });
+
+        // Handle cursor visibility
+        document.addEventListener('mouseleave', () => {
+            cursor.style.display = 'none';
+        });
+
+        document.addEventListener('mouseenter', () => {
+            cursor.style.display = 'block';
+        });
+        function toggleMenu() {
+            const overlay = document.querySelector(".overlay");
+            overlay.classList.toggle("active");
+        }
+
+        document.addEventListener("contextmenu", (event) => event.preventDefault());
+  document.addEventListener("keydown", (event) => {
+    if (event.ctrlKey && (event.key === "u" || event.key === "U" || event.key === "i" || event.key === "I")) {
+      event.preventDefault();
+    }
+    if (event.key === "F12") {
+      event.preventDefault();
+    }
+  });
+  document.addEventListener("DOMContentLoaded", function () {
+    let lastScrollTop = 0;
+    const navbar = document.getElementById("navbar");
+    let timeout;
+
+    window.addEventListener("scroll", function () {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        let maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+
+        if (scrollTop === 0 || scrollTop >= maxScroll) {
+            // Hide navbar at the top and bottom
+            navbar.style.top = "-80px";
+        } else if (scrollTop > lastScrollTop) {
+            // Hide navbar when scrolling down
+            navbar.style.top = "-80px";
+        } else {
+            // Show navbar when scrolling up, but NOT when at the top
+            navbar.style.top = "0";
+        }
+
+        // Clear previous timeout to avoid conflicts
+        clearTimeout(timeout);
+        
+        // Show navbar if scrolling stops, but NOT at the top or bottom
+        if (scrollTop > 50 && scrollTop < maxScroll - 50) {
+            timeout = setTimeout(() => {
+                navbar.style.top = "0";
+            }, 300); // Delay to detect stop
+        }
+
+        lastScrollTop = scrollTop;
+    });
+});
+
+
+
+
+
+  </script>
+</body>
+</html>
+
+

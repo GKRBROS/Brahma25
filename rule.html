@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="./logo 1.png" type="image/x-icon">
+  <title>Brahma'25</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+    /* Reset and Base Styles */
+    @font-face {
+  font-family: myFirst;
+  src: url(./Montserrat-Regular.ttf);
+}
+
+@font-face {
+  font-family: myFirstFont;
+  src: url('./fonts/fonnts.com-Vincente-Extra-Bold.otf');
+}
+
+@font-face {
+  font-family: my;
+  src: url(./BebasNeue-Regular.otf);
+}
+
+::-webkit-scrollbar {
+  width: 12px;                /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: black;           /* Black background for the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: grey;      /* Grey color for the thumb */
+  border-radius: 6px;          /* Rounded edges for the thumb */
+  border: 2px solid black;     /* Optional: border around the thumb */
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;       /* Makes the scrollbar thinner */
+  scrollbar-color: grey black; /* Thumb color first (grey), then track color (black) */
+}
+
+
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: url('874M4.png') no-repeat center center/cover;
+      min-height: 100vh;
+      color: #333;
+      overflow-y: auto;
+    }
+    nav {
+      width: 100%;
+      height: 80px;
+      line-height: 80px;
+      background: linear-gradient(135deg,
+          rgba(0, 0, 0, 0.15) 0%,
+          rgba(0, 0, 0, 0.25) 100%);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      border-bottom: 2px solid #333;
+      z-index: 1000;
+    }
+    
+    .menu-icon {
+      width: 45px;
+      height: 15px;
+      position: relative;
+      cursor: pointer;
+      color: #fff;
+    }
+    
+    .menu-icon::before,
+    .menu-icon::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: white;
+      position: absolute;
+      left: 0;
+      transition: transform 0.4s ease, background-color 0.3s ease;
+    }
+    
+    .menu-icon::before {
+      top: 0;
+    }
+    
+    .menu-icon::after {
+      bottom: 0;
+    }
+    
+    .menu-icon:hover::before {
+      transform: translateX(-10px);
+    }
+    
+    .menu-icon:hover::after {
+      transform: translateX(10px);
+    }
+    
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.4s ease-in-out;
+      z-index: 999;
+    }
+    
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .overlay ul {
+      list-style: none;
+      text-align: center;
+      padding: 0;
+    }
+    
+    .overlay ul li {
+      margin: 20px 0;
+    }
+    
+    .overlay ul li a {
+      color: white;
+      text-decoration: none;
+      font-family: myFirstFont;
+      font-size: 78px;
+      font-weight: 700;
+      position: relative;
+      display: inline-block;
+      transition: color 0.3s ease;
+    }
+    
+    .overlay ul li a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%) scaleX(0);
+      width: 100%;
+      height: 8px;
+      background-color: red;
+      transform-origin: center;
+      transition: transform 0.4s ease;
+    }
+    
+    .overlay ul li a:hover::after {
+      transform: translateY(-50%) scaleX(1);
+    }
+    
+    .logon {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 50px;
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 35px;
+      color: white;
+      cursor: pointer;
+    }
+    
+    /* Full-Body Glass Overlay */
+    .glass-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+
+    /* Content Container (Glass Card) */
+    .rules-container {
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  backdrop-filter: blur(5px);      /* Optional: adds a blur effect */
+  -webkit-backdrop-filter: blur(5px);/* For Safari support */
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
+  width: 90%;
+  padding: 20px;
+  overflow-y: auto;
+  max-height: 90vh;
+  
+}
+    /* Header Styles */
+    header {
+      text-align: center;
+      margin-top: 110px;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: #4CAF50;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.1rem;
+      color: #0c0b0b;
+    }
+
+    /* Rules Content */
+    .rules-content ul {
+      font-size: 1.2em;
+      list-style-type: disc;
+      padding-left: 20px;
+      margin-bottom: 20px;
+      color:#fff8f8;
+      font-family: myFirst;
+  font-optical-sizing: auto;
+  
+  font-style: normal;
+    }
+    .rules-content ul li {
+      margin-bottom: 20px;
+       /* Increase the space between list items */
+  line-height: 1.6; 
+    }
+
+    /* Footer Styles */
+   
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      header p,
+      .rules-content ul li {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+      header p,
+      .rules-content ul li {
+        font-size: 0.9rem;
+      }
+    }
+    header h1 {
+  font-size: 2.5rem; /* Adjust as needed */
+  font-family:my;
+  color: #e6e6e6;
+  margin-bottom: 10px;
+}
+  </style>
+  <nav>
+        
+    <div class="menu-icon" onclick="toggleMenu()"></div>
+  
+    <img src="./logo 1.png" alt="Logo" class="logon">
+  </nav>
+  <div class="overlay">
+    
+    <ul>
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="../index.html#about">ABOUT</a></li>
+        <li><a href="./event.html">EVENTS</a></li>
+       
+    </ul>
+</div>
+</head>
+<body>
+    
+  <div class="glass-overlay">
+    <div class="rules-container">
+        
+        <header>
+            <h1>Rules and Regulations</h1>
+            
+          </header>
+          <br><br>
+      <div class="rules-content">
+        <ul>
+      <li>The judge's decision will be final for all the events.</li>
+      <li>All students should wear ID cards inside the campus. No students will be permitted in the campus without a valid ID card.</li>
+      <li>Security and core committee have the right to check the identity cards of the students and deny entry to the campus if students fail to show.</li>
+      <li>All participants should bring valid ID cards.</li>
+      <li>Entry to PROSHOWS is permitted only to ASIET students.</li>
+      <li>The judges have the right to curtail the conduct of any event, if the event performed is not in conformity with the event rules, general rules and/or the standard expected.</li>
+      <li>Lack of compliance with the rules will not be permitted.</li>
+      <li>The event will be cancelled in case of misconduct with respect to college norms.  </li>
+      <li>Any case of appeal is to be reported to the Result and Appellate Committee at least 20 min after the declaration of the results. The protest fee of Rs 500/- along with the hard copy of the appeal form is to be submitted in the result room. The fee will not be refunded unless the complaint is proved to be genuine.</li>
+      <li>The events will be conducted only if there are at least 3 participants/teams (out of which at least one must be a guest team/participant). If there are only 3 participants/teams, only one prize (first prize) will be declared.</li>
+      <li>If two teams secure the first prize, the total prize money (first and second) will be distributed among them. In this case, the second prize stands cancelled.</li>
+      <li>If two teams win the second position, the sum of the second prize will be distributed among them.</li>
+      <li>If an event has only internal participants (ASIET), the prize money will be reduced to 1/3rd of the declared amount.</li>
+      <li>Any doubts regarding the rules of events should be clarified with the organizers before the commencement of the event.</li>
+      <li>The organizers will reschedule the program for the successful and timely completion of the events. If the participant/group finds any clash in the timings of the respective events, they must willingly choose to participate in one. The Student Council or organizers will not be responsible for any clash in the events or losses thus incurred.</li>
+      <li>The costumes used for the events must exhibit modesty and follow the decorum of the college campus. In case of any misconduct, the management will enforce rigorous disciplinary measures.</li>
+      <li>The individual/team is required to produce the USB of the tracks to be played for the performance at least 10 minutes before the commencement of the event. Any kind of delay or lack of submission will lead to the cancellation of the same. The participant/team will not be given another chance in case of any errors in the tracks produced. The track produced must be in MP3 format.</li>
+      <li>Staff Advisors to Student Council reserves the right to change the schedule and the rules of the events with the consent of the Principal/Management of ASIET. No objections will be entertained in this regard.</li>
+      <li>Participants arriving at the campus should confirm their participation at the registration counter.</li>
+      <li>The participation registration fee is as mentioned in the respective event rules.</li>
+      <li>Neither the institute nor the BRAHMA committee shall be responsible for any misplacement or loss of belongings during these days. (For special attention of participants coming in groups).</li>
+      <li>Each group is advised to carry a list of group members, along with their college ID at the time of check-in. Carrying such a list can considerably reduce the delay at the registration desk.</li>
+      <li>Mail your queries to brahma@adishankara.ac.in.</li>
+      <li>The program committee reserves the right to deduct from the caution deposit or the prize money for any loss/damage caused by the participant. In the case of students (from institutions other than ASIET) causing destruction or damage to ASIET, legal action could be sought by the organizers.</li>
+        </ul>
+      </div>
+     
+    </div>
+  </div>
+</body>
+<script>
+     function toggleMenu() {
+      const overlay = document.querySelector('.overlay');
+      overlay.classList.toggle('active');
+    }
+    
+</script>
+</html>
