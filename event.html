@@ -26,6 +26,14 @@
   src: url('./fonts/fonnts.com-Vincente-Extra-Bold.otf');
 }
     /* Loader Styles */
+    body.loading {
+      overflow: hidden;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Loader Styles */
     #loader {
       position: fixed;
       top: 0;
@@ -40,39 +48,20 @@
       transition: opacity 0.5s ease;
     }
     
-    /* Updated video styles: fill the loader and cover the area */
     #loader video {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
     
-    /* Content Container - Initially Hidden */
+    /* Content Container */
     #content {
       opacity: 0;
+      transition: opacity 0.5s ease;
     }
-    ::-webkit-scrollbar {
-  width: 12px;                /* Width of the scrollbar */
-}
-
-::-webkit-scrollbar-track {
-  background: black;           /* Black background for the scrollbar track */
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: grey;      /* Grey color for the thumb */
-  border-radius: 6px;          /* Rounded edges for the thumb */
-  border: 2px solid black;     /* Optional: border around the thumb */
-}
-
-/* Firefox */
-* {
-  scrollbar-width: thin;       /* Makes the scrollbar thinner */
-  scrollbar-color: grey black; /* Thumb color first (grey), then track color (black) */
-}
-    /* Simple Fade-In Animation */
+    
     #content.visible {
-      animation: fadeIn 1s ease forwards;
+      opacity: 1;
     }
     
     @keyframes fadeIn {
@@ -394,10 +383,9 @@
     }
   </style>
 </head>
-<body>
+<body class="loading">
   <!-- Loader -->
   <div id="loader">
-    <!-- Note: the video now has the id "loaderVideo" -->
     <video id="loaderVideo" src="./loader.mp4" autoplay muted playsinline></video>
   </div>
   
@@ -671,7 +659,7 @@
     </a>
 </div>
 <div class="event-card" data-category="all">
-  <a href="https://makemypass.com/bmw-engine" target="_blank">
+  <a href="https://makemypass.com/bmw-workshop" target="_blank">
       <img src="./Tech/bmwEng.jpg">
   </a>
 </div>
@@ -690,43 +678,6 @@
       <img src="./Tech/roboS.jpg">
   </a>
 </div>
-<div class="event-card" data-category="all">
-  <a href="http://forms.gle/3daU2JE55SLSzphQ6" target="_blank">
-      <img src="./Tech/3D SCAPE.jpg">
-  </a>
-</div>
-<div class="event-card" data-category="all">
-  <a href="http://makemypass.com/codex-cup" target="_blank">
-      <img src="./Tech/codex.png">
-  </a>
-</div>
-<div class="event-card" data-category="all">
-  <a href="http://forms.gle/KrHEp67oj2veTHLj9" target="_blank">
-      <img src="./Tech/Mern Craft1.jpg">
-  </a>
-</div>
-<div class="event-card" data-category="all">
-  <a href="http://makemypass.com/bulb-city" target="_blank">
-      <img src="./Tech/bulb.jpg">
-  </a>
-</div>
-<div class="event-card" data-category="all">
-  <a href="http://makemypass.com/ideathon" target="_blank">
-      <img src="./Tech/ideathon.jpg">
-  </a>
-</div>
-<div class="event-card" data-category="all">
-  <a href="http://makemypass.com/blockonomics" target="_blank">
-      <img src="./Tech/block.jpg">
-  </a>
-</div>
-<div class="event-card" data-category="all">
-  <a href="http://makemypass.com/tech-trivia" target="_blank">
-      <img src="./Tech/quiz.jpg">
-  </a>
-</div>
-
-
 <!----===========General Events===================-->
       <div class="event-card" data-category="general">
         <a href="https://makemypass.com/asiet-talkies" target="_blank">
@@ -962,7 +913,7 @@
         </a>
     </div>
     <div class="event-card" data-category="technical">
-        <a href="https://makemypass.com/bmw-engine" target="_blank">
+        <a href="https://makemypass.com/bmw-workshop" target="_blank">
             <img src="./Tech/bmwEng.jpg">
         </a>
     </div>
@@ -979,41 +930,6 @@
     <div class="event-card" data-category="technical">
         <a href="https://makemypass.com/robo-soccer" target="_blank">
             <img src="./Tech/roboS.jpg">
-        </a>
-    </div>
-    <div class="event-card" data-category="technical">
-        <a href="http://forms.gle/3daU2JE55SLSzphQ6" target="_blank">
-            <img src="./Tech/3D SCAPE.jpg">
-        </a>
-    </div>
-    <div class="event-card" data-category="technical">
-        <a href="http://makemypass.com/codex-cup" target="_blank">
-            <img src="./Tech/codex.png">
-        </a>
-    </div>
-    <div class="event-card" data-category="technical">
-        <a href="http://forms.gle/KrHEp67oj2veTHLj9" target="_blank">
-            <img src="./Tech/Mern Craft1.jpg">
-        </a>
-    </div>
-    <div class="event-card" data-category="technical">
-        <a href="http://makemypass.com/bulb-city" target="_blank">
-            <img src="./Tech/bulb.jpg">
-        </a>
-    </div>
-    <div class="event-card" data-category="technical">
-        <a href="http://makemypass.com/ideathon" target="_blank">
-            <img src="./Tech/ideathon.jpg">
-        </a>
-    </div>
-    <div class="event-card" data-category="technical">
-        <a href="http://makemypass.com/blockonomics" target="_blank">
-            <img src="./Tech/block.jpg">
-        </a>
-    </div>
-    <div class="event-card" data-category="technical">
-        <a href="http://makemypass.com/tech-trivia" target="_blank">
-            <img src="./Tech/quiz.jpg">
         </a>
     </div>
     
@@ -1044,22 +960,31 @@
     });
     
     // When the loader video ends, fade out the loader and fade in the content
-    const loaderVideo = document.getElementById('loaderVideo');
-    loaderVideo.addEventListener('ended', function() {
+    document.addEventListener('DOMContentLoaded', function() {
       const loader = document.getElementById('loader');
-      loader.style.opacity = '0';
-      setTimeout(function() {
-        loader.style.display = 'none';
-      }, 500);
-      
       const content = document.getElementById('content');
-      content.classList.add('visible');
+      const body = document.body;
+      
+      // Hide loader after 2 seconds
+      setTimeout(function() {
+        loader.style.opacity = '0';
+        body.classList.remove('loading'); // Enable scrolling
+        
+        // Remove loader from DOM after fade out
+        setTimeout(function() {
+          loader.style.display = 'none';
+        }, 500);
+        
+        // Show content
+        content.classList.add('visible');
+      }, 3000);
+      
+      // Initialize default filter
+      filterEvents('all');
     });
 
-    // let vid = document.getElementById("loaderVideo");
-    // vid.playbackRate = 1.2;
-
-
+    /*let vid = document.getElementById("loaderVideo");
+        vid.playbackRate = 1.2;*/
   </script>
 </body>
 </html>
