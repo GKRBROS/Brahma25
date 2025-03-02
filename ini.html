@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="Icon" href="./logo 1.png">
+  <title>Brahma'25</title>
+  <style>
+    @font-face {
+      font-family: costom1;
+      src: url("./Dune_Rise.otf");
+    }
+    @font-face {
+      font-family: costom2;
+      src: url("./MINECRAFT\ PE.ttf");
+    }
+    
+    @font-face {
+      font-family: myFirstFont;
+      src: url("./Dune_Rise.otf");
+    }
+
+    /* CSS Background */
+    html {
+      --s: 220px; /* control the size */
+      --c1: #1d1d1d;
+      --c2: #4e4f51;
+      --c3: #3c3c3c;
+      
+      background:
+        repeating-conic-gradient(from 30deg, #0000 0 120deg, var(--c3) 0 50%) 
+         calc(var(--s)/2) calc(var(--s)*tan(30deg)/2),
+        repeating-conic-gradient(from 30deg, var(--c1) 0 60deg, var(--c2) 0 120deg, var(--c3) 0 50%);
+      background-size: var(--s) calc(var(--s)*tan(30deg));
+    }
+    
+    /* Dark overlay covering the entire viewport */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.849); /* dark overlay */
+      z-index: 2; /* Placed above the html background */
+      pointer-events: none;
+    }
+    
+    /* ---- Global Styles ---- */
+    body {
+      background-color: transparent; /* Allow html background to show */
+      color: #fff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding-top: 100px;
+      position: relative; /* Ensures content is above the overlay */
+      z-index: 3;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    /* ---- Title ---- */
+    .title {
+      text-align: center;
+      font-size: 4rem;
+      font-weight: bold;
+      letter-spacing: 0.2em;
+      margin-bottom: 100px;
+      font-family: "costom1", sans-serif;
+      /* Outline effect (visible in WebKit browsers) */
+      -webkit-text-stroke: 1px white;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+      padding: 0 15px;
+    }
+    
+    /* ---- Event Section with Glass Morphism ---- */
+    .event-section {
+      margin-bottom: 60px;
+      position: relative;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .event-name {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      font-weight: bold;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    /* ---- Results Tree ---- */
+    .results-tree {
+      position: relative;
+      margin-left: 100px;
+    }
+
+    .branch-container {
+      position: relative;
+    }
+
+    /* Vertical trunk line */
+    .branch-container::before {
+      content: '';
+      position: absolute;
+      left: -40px;
+      top: 0;
+      width: 2px;
+      height: 100%;
+      background: white;
+    }
+
+    /* Each horizontal branch */
+    .branch {
+      position: relative;
+      margin: 25px 0;
+      display: flex;
+      align-items: flex-start;
+      cursor: pointer; /* Indicates the branch is hoverable */
+    }
+
+    /* Base horizontal line (white) */
+    .branch::before {
+      content: '';
+      position: absolute;
+      left: -40px;
+      top: 12px; /* Align with dot center */
+      width: 40px;
+      height: 2px;
+      background: white;
+    }
+
+    /* "Liquid" overlay that will grow on hover */
+    .branch::after {
+      content: '';
+      position: absolute;
+      left: -40px;
+      top: 12px; /* Align with dot center */
+      width: 0;
+      height: 2px;
+      transition: width 0.8s ease;
+    }
+
+    /* Dot: bigger (16px), white border, transparent fill */
+    .dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid white;
+      margin-right: 30px;
+      background: transparent;
+      margin-top: 4px; /* Adjust vertical alignment */
+      /* Delayed fill to simulate liquid flow finishing */
+      transition: background 0.4s ease 0.4s;
+      flex-shrink: 0;
+    }
+
+    /* ---- Result Content (Names, College) ---- */
+    .result-content {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .names {
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      line-height: 1.3;
+    }
+
+    .college {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      line-height: 1.3;
+    }
+
+    /* ---- Place-Specific Classes ---- */
+    /* 1st place: gold (#FFD700) */
+    .branch.first::after {
+      background: #F4DF4EFF;
+    }
+    .branch.first:hover .dot {
+      background: #F4DF4EFF;
+    }
+
+    /* 2nd place: silver (#C0C0C0) */
+    .branch.second::after {
+      background: #949398FF;
+    }
+    .branch.second:hover .dot {
+      background: #949398FF;
+    }
+
+    /* 3rd place: bronze (#CD7F32) */
+    .branch.third::after {
+      background: #CD7F32;
+    }
+    .branch.third:hover .dot {
+      background: #CD7F32;
+    }
+
+    /* On hover, expand the "liquid" from 0 to full width (40px) */
+    .branch:hover::after {
+      width: 40px;
+    }
+    
+    nav {
+      width: 100%;
+      height: 80px;
+      line-height: 80px;
+      background: linear-gradient(135deg,
+          rgba(0, 0, 0, 0.15) 0%,
+          rgba(0, 0, 0, 0.25) 100%);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px); /* For Safari */
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      border-bottom: 2px solid #333;
+      z-index: 1000;
+    }
+
+    /* Menu Icon */
+    .menu-icon {
+      width: 45px; /* Width of the menu bar lines */
+      height: 15px; /* Height of the container */
+      position: relative; /* For positioning the lines */
+      cursor: pointer; /* Pointer cursor on hover */
+      color: #fff;
+    }
+    
+    #navbar {
+      position: fixed;
+      top: -80px; /* Start hidden */
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8); /* Semi-transparent for effect */
+      transition: top 0.4s ease-in-out; /* Smooth transition */
+      z-index: 1000;
+    }
+
+    .menu-icon::before,
+    .menu-icon::after {
+      content: '';
+      display: block;
+      width: 100%; /* Full width of the container */
+      height: 2px; /* Thickness of the lines */
+      background-color: white; /* Color of the lines */
+      position: absolute; /* Positioning relative to .menu-icon */
+      left: 0; /* Align the lines to the left */
+      transition: transform 0.4s ease, background-color 0.3s ease; /* Smooth animation */
+    }
+
+    .menu-icon::before {
+      top: 0; /* Position the top line */
+    }
+
+    .menu-icon::after {
+      bottom: 0; /* Position the bottom line */
+    }
+
+    /* Hover Effect */
+    .menu-icon:hover::before {
+      transform: translateX(-10px); /* Move top line to the left */
+    }
+
+    .menu-icon:hover::after {
+      transform: translateX(10px); /* Move bottom line to the right */
+    }
+
+    /* Full-Screen Overlay Menu */
+    .overlay1 {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.4s ease-in-out;
+      z-index: 999;
+    }
+    
+    .overlay1.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .overlay1 ul {
+      list-style: none;
+      text-align: center;
+      padding: 0;
+    }
+
+    .overlay1 ul li {
+      margin: 20px 0;
+    }
+
+    .overlay1 ul li a {
+      color: white;
+      text-decoration: none;
+      font-family: myFirstFont, sans-serif;
+      font-size: 78px;
+      font-weight: 700;
+      position: relative; /* For positioning the pseudo-element */
+      display: inline-block; /* Ensures inline styling works properly */
+      transition: color 0.3s ease; /* Smooth text color transition */
+      line-height: 1.2;
+    }
+
+    .overlay1 ul li a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%; /* Position the line in the vertical center of the text */
+      transform: translateY(-50%) scaleX(0); /* Hidden line initially */
+      width: 100%; /* Full width of the text */
+      height: 8px; /* Thickness of the red line */
+      background-color: red; /* Red line color */
+      transform-origin: center;
+      transition: transform 0.4s ease; /* Smooth animation for line */
+    }
+
+    .overlay1 ul li a:hover::after {
+      transform: translateY(-50%) scaleX(1); /* Fully reveal the line on hover */
+    }
+    
+    .logon {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 50px; /* Adjust the height of the logo */
+    }
+
+    /* RESPONSIVE STYLES */
+    @media (max-width: 768px) { 
+      .title {
+        font-size: 2.8rem;
+        margin-bottom: 50px;
+        letter-spacing: 0.15em;
+        text-align: center;
+      }
+      
+      .container {
+        padding-top: 100px;
+      }
+      
+      .results-tree {
+        margin-left: 60px;
+      }
+      
+      .event-name {
+        font-size: 1.7rem;
+      }
+      
+      .overlay1 ul li a {
+        font-size: 50px;
+      }
+      
+      .overlay1 ul li a::after {
+        height: 6px;
+      }
+      
+      .branch::before, 
+      .branch::after {
+        top: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .title {
+        font-size: 2.2rem;
+        letter-spacing: 0.1em;
+        margin-bottom: 40px;
+        text-align: center;
+      }
+      
+      .container {
+        padding-top: 80px;
+      }
+      
+      .results-tree {
+        margin-left: 40px;
+      }
+      
+      .names {
+        font-size: 1rem;
+      }
+      
+      .college {
+        font-size: 0.85rem;
+      }
+      
+      .dot {
+        width: 12px;
+        height: 12px;
+        margin-right: 15px;
+        margin-top: 3px;
+      }
+      
+      .branch-container::before {
+        left: -25px;
+      }
+      
+      .branch::before {
+        width: 25px;
+        left: -25px;
+        top: 8px;
+      }
+      
+      .branch::after {
+        left: -25px;
+        top: 8px;
+      }
+      
+      .branch:hover::after {
+        width: 25px;
+      }
+      
+      .event-section {
+        padding: 15px;
+        margin-bottom: 30px;
+      }
+      
+      .event-name {
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+      }
+      
+      .overlay1 ul li a {
+        font-size: 32px;
+      }
+      
+      .overlay1 ul li a::after {
+        height: 4px;
+      }
+      
+      .overlay1 ul li {
+        margin: 15px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav id="navbar">
+    <div class="menu-icon" onclick="toggleMenu()"></div>
+    <img src="./logo 1.png" alt="Logo" class="logon">
+  </nav>
+  
+  <div class="overlay1">
+    <ul>
+      <li><a href="#">HOME</a></li>
+      <li><a href="#about">ABOUT</a></li>
+      <li><a href="./event.html">EVENTS</a></li>
+      <li><a href="./rule.html">RULES</a></li>
+    </ul>
+  </div>
+  
+  <div class="overlay"></div>
+  <div class="container">
+    <!-- Page Title -->
+     
+    <h1 class="title">RESULTS</h1>
+  
+    
+    <!-- Event Sections -->
+    <div class="event-section">
+      <div class="event-name">IDEATHON</div>
+      <div class="results-tree">
+        <div class="branch-container">
+          <div class="branch first">
+            <div class="dot"></div>
+            <div class="result-content">
+              <div class="names">Sooryakrishna P R & Team </div>
+              <div class="college">Christ College of Engineering</div>
+            </div>
+          </div>
+          <div class="branch second">
+            <div class="dot"></div>
+            <div class="result-content">
+              <div class="names">Athul Krishna N S & Team</div>
+              <div class="college">ASIET</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="event-section">
+      <div class="event-name">GPTALES</div>
+      <div class="results-tree">
+        <div class="branch-container">
+          <div class="branch first">
+            <div class="dot"></div>
+            <div class="result-content">
+              <div class="names">MOHAMED RAZIN MUJEEB</div>
+              <div class="college">ASIET</div>
+            </div>
+          </div>
+          <div class="branch second">
+            <div class="dot"></div>
+            <div class="result-content">
+              <div class="names">ANANDHAKRISHNAN P S</div>
+              <div class="college">ASIET</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="event-section">
+      <div class="event-name">RAGAM</div>
+      <div class="results-tree">
+        <div class="branch-container">
+          <div class="branch first">
+            <div class="dot"></div>
+            <div class="result-content">
+              <div class="names">MEERA M NAIR</div>
+              <div class="college">RLV COLLEGE TRIPUPUNITHURA</div>
+            </div>
+          </div>
+          <div class="branch second">
+            <div class="dot"></div>
+            <div class="result-content">
+              <div class="names">ROHITH ANEESH</div>
+              <div class="college">SREE SANKARACHARYA UNIVERSITY OF SANSKRIT</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="event-section">
+      <div class="event-name">MIME</div>
+      <div class="results-tree">
+        <div class="branch-container">
+          <div class="branch first">
+            <div class="dot"></div>
+            <div class="result-content">
+              <div class="names">GPTC PERUMBAVOOR</div>
+            </div>
+          </div>
+          <div class="branch second">
+            <div class="dot"></div>
+            <div class="result-content">
+              <div class="names">RHYTHM OF INVICIBLES</div>
+              <div class="college">ST. GEORGE'S COLLEGE ALUVA</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="event-section">
+      <div class="event-name">THEME SHOW</div>
+      <div class="results-tree">
+        <div class="branch-container">
+          <div class="branch first">
+            <div class="dot"></div>
+            <div class="result-content">
+              <div class="names">MAYA</div>
+              <div class="college">ASIET</div>
+            </div>
+          </div>
+          <div class="branch second">
+            <div class="dot"></div>
+            <div class="result-content">
+              <div class="names">KALAM VARNA</div>
+              <div class="college">DREAM ZONE</div>
+            </div>
+          </div>
+          <div class="branch third">
+            <div class="dot"></div>
+            <div class="result-content">
+              <div class="names">StyFa</div>
+              <div class="college">Nehru Arts and Science college, Coimbatore</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function toggleMenu() {
+      const overlay = document.querySelector('.overlay1');
+      overlay.classList.toggle('active');
+    }
+    
+    document.addEventListener("DOMContentLoaded", function () {
+      let lastScrollTop = 0;
+      const navbar = document.getElementById("navbar");
+      let timeout;
+  
+      // Show navbar on mobile initially
+      if (window.innerWidth <= 768) {
+        navbar.style.top = "0";
+      }
+      
+      window.addEventListener("scroll", function () {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        let maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  
+        if (scrollTop === 0 || scrollTop >= maxScroll) {
+          // Hide navbar at the top and bottom
+          navbar.style.top = "-80px";
+        } else if (scrollTop > lastScrollTop) {
+          // Hide navbar when scrolling down
+          navbar.style.top = "-80px";
+        } else {
+          // Show navbar when scrolling up, but NOT when at the top
+          navbar.style.top = "0";
+        }
+  
+        // Clear previous timeout to avoid conflicts
+        clearTimeout(timeout);
+        
+        // Show navbar if scrolling stops, but NOT at the top or bottom
+        if (scrollTop > 50 && scrollTop < maxScroll - 50) {
+          timeout = setTimeout(() => {
+            navbar.style.top = "0";
+          }, 300); // Delay to detect stop
+        }
+  
+        lastScrollTop = scrollTop;
+      });
+      
+      // Handle window resize
+      window.addEventListener("resize", function() {
+        if (window.innerWidth <= 768) {
+          // Always show navbar on small screens when page loads
+          navbar.style.top = "0";
+        }
+      });
+    });
+    document.addEventListener("contextmenu", (event) => event.preventDefault());
+  document.addEventListener("keydown", (event) => {
+    if (event.ctrlKey && (event.key === "u" || event.key === "U" || event.key === "i" || event.key === "I")) {
+      event.preventDefault();
+    }
+    if (event.key === "F12") {
+      event.preventDefault();
+    }
+  });
+  </script>
+</body>
+</html>
